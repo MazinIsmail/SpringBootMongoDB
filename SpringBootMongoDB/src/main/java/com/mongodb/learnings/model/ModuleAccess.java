@@ -5,13 +5,13 @@ import java.util.List;
 import javax.validation.constraints.NotEmpty;
 
 public class ModuleAccess {
-	
+
 	@NotEmpty
 	private String moduleName;
-	
+
 	@NotEmpty
 	private List<ModuleAccessRights> moduleAccessRights;
-	
+
 	public ModuleAccess() {
 		super();
 	}
@@ -40,8 +40,7 @@ public class ModuleAccess {
 
 	@Override
 	public String toString() {
-		return "ModuleAccess [moduleName=" + moduleName + ", moduleAccessRights=" + moduleAccessRights
-				+ "]";
+		return "ModuleAccess [moduleName=" + moduleName + ", moduleAccessRights=" + moduleAccessRights + "]";
 	}
-	
+
 }

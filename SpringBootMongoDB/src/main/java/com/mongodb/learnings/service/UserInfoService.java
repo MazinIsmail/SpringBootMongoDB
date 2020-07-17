@@ -12,12 +12,11 @@ import com.mongodb.learnings.repo.UserInfoRepo;
 
 @Service
 public class UserInfoService {
-	public static final Logger logger = LoggerFactory
-			.getLogger(UserInfoService.class);
+	public static final Logger logger = LoggerFactory.getLogger(UserInfoService.class);
 
 	@Autowired
 	private UserInfoRepo userInfoRepo;
-	
+
 	@Autowired
 	private UserInfoHelper userInfoHelper;
 
@@ -30,10 +29,11 @@ public class UserInfoService {
 		logger.debug("End : getAllUserInfoData()");
 		return userInfoList;
 	}
-	
+
 	public List<UserInfo> getUsers() {
 		logger.debug("Start : getUsers()");
+		List<UserInfo> userInfoList = userInfoRepo.saveAll(userInfoHelper.getUsers());
 		logger.debug("End : getUsers()");
-		return userInfoHelper.getUsers();
+		return userInfoList;
 	}
 }

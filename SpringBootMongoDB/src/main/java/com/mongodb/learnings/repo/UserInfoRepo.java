@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.mongodb.learnings.repo;
 
 import org.springframework.data.mongodb.repository.MongoRepository;

@@ -36,7 +36,7 @@ public class Role {
 
 	@LastModifiedDate
 	private String modifiedDate;
-	
+
 	private String groupId;
 
 	public String getRoleId() {
@@ -117,5 +117,5 @@ public class Role {
 				+ moduleAccessList + ", createdBy=" + createdBy + ", createdDate=" + createdDate + ", modifiedBy="
 				+ modifiedBy + ", modifiedDate=" + modifiedDate + ", groupId=" + groupId + "]";
 	}
-	
+
 }

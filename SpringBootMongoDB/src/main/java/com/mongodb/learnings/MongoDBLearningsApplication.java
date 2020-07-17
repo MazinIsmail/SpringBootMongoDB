@@ -4,8 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MongodbPocApplication {
+public class MongoDBLearningsApplication {
 	public static void main(String[] args) {
-		SpringApplication.run(MongodbPocApplication.class, args);
+		SpringApplication.run(MongoDBLearningsApplication.class, args);
 	}
 }

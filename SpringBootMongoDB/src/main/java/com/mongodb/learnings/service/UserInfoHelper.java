@@ -12,15 +12,14 @@ import com.mongodb.learnings.model.UserInfo;
 @Service
 public class UserInfoHelper {
 
-	public List<UserInfo> getUsers(){
-		
-		UserInfo userInfo1 =  new UserInfo();
+	public List<UserInfo> getUsers() {
+
+		UserInfo userInfo1 = new UserInfo();
 		userInfo1.setActive(true);
 		userInfo1.setCreatedBy("Mazin");
 		userInfo1.setCreatedDate("17-07-2020");
 		userInfo1.setDefaultHomePage("true");
 		userInfo1.setEmail("Mazin@test.com");
-		userInfo1.setId("1");
 		userInfo1.setLastLogin(new Date());
 		userInfo1.setModifiedBy("Mazin");
 		userInfo1.setModifiedDate("17-07-2020");
@@ -33,8 +32,8 @@ public class UserInfoHelper {
 		role1.setRoleName("TeamLead");
 		userInfo1.setUserRole(role1);
 		userInfo1.setUserStatus("Active");
-		
-		UserInfo userInfo2 =  new UserInfo();
+
+		UserInfo userInfo2 = new UserInfo();
 		userInfo2.setActive(true);
 		userInfo2.setCreatedBy("Bhairavi");
 		userInfo2.setCreatedDate("17-07-2020");
@@ -53,8 +52,8 @@ public class UserInfoHelper {
 		role2.setRoleName("Developer");
 		userInfo2.setUserRole(role2);
 		userInfo2.setUserStatus("Active");
-		
-		UserInfo userInfo3 =  new UserInfo();
+
+		UserInfo userInfo3 = new UserInfo();
 		userInfo3.setActive(true);
 		userInfo3.setCreatedBy("Viswa");
 		userInfo3.setCreatedDate("17-07-2020");
@@ -73,12 +72,12 @@ public class UserInfoHelper {
 		role3.setRoleName("Developer");
 		userInfo3.setUserRole(role3);
 		userInfo3.setUserStatus("Active");
-		
-		ArrayList<UserInfo> userList = new ArrayList();
+
+		List<UserInfo> userList = new ArrayList();
 		userList.add(userInfo1);
 		userList.add(userInfo2);
 		userList.add(userInfo3);
-		
+
 		return userList;
 	}
 }
