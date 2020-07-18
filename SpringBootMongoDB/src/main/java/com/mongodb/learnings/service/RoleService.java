@@ -115,28 +115,11 @@ public class RoleService {
 		roleList.add(roleServiceHelper.setRoleSystemAdmin());
 		roleList.add(roleServiceHelper.setRoleBasic());
 		roleList.add(roleServiceHelper.setRoleRoot());
-		// roleList.add(roleServiceHelper.setRoleSupport());
 
 		logger.debug("size of list {}", roleList.size());
 		roleList = roleRepository.insert(roleList);
 		return roleList;
 	}
-
-	public boolean checkUniqueJobTitle(Role updateRole) {
-		boolean flag = true;
-		List<String> jobTitleList = updateRole.getJobTitle();
-		List<Role> roleList = findAll();
-		for (String jobTitle : jobTitleList) {
-			for (Role role : roleList) {
-				if (role.getJobTitle().contains(jobTitle) && !updateRole.getRoleName().equals(role.getRoleName())) {
-					flag = false;
-					break;
-				}
-			}
-		}
-		return flag;
-	}
-
 
 	public List<Role> getAllRole() {
 		Query query = new Query();
