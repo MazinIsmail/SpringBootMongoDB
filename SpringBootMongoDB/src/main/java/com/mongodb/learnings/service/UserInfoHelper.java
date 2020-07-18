@@ -4,13 +4,17 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mongodb.learnings.model.Role;
+import com.mongodb.learnings.constants.RoleNames;
 import com.mongodb.learnings.model.UserInfo;
 
 @Service
 public class UserInfoHelper {
+
+	@Autowired
+	private RoleService roleService;
 
 	public List<UserInfo> getUsers() {
 
@@ -24,13 +28,10 @@ public class UserInfoHelper {
 		userInfo1.setModifiedBy("Mazin");
 		userInfo1.setModifiedDate("17-07-2020");
 		userInfo1.setUserFirstName("Mazin");
-		userInfo1.setUserId("1234");
 		userInfo1.setUserLastName("Ismail");
 		userInfo1.setUserName("Mazin");
 		userInfo1.setUserPassword("****");
-		Role role1 = new Role();
-		role1.setRoleName("TeamLead");
-		userInfo1.setUserRole(role1);
+		userInfo1.setUserRole(roleService.findByRoleName(RoleNames.ROOT.getRoleNameDesc()));
 		userInfo1.setUserStatus("Active");
 
 		UserInfo userInfo2 = new UserInfo();
@@ -39,7 +40,6 @@ public class UserInfoHelper {
 		userInfo2.setCreatedDate("17-07-2020");
 		userInfo2.setDefaultHomePage("true");
 		userInfo2.setEmail("Bhairavi@test.com");
-		userInfo2.setId("1");
 		userInfo2.setLastLogin(new Date());
 		userInfo2.setModifiedBy("Bhairavi");
 		userInfo2.setModifiedDate("17-07-2020");
@@ -48,9 +48,7 @@ public class UserInfoHelper {
 		userInfo2.setUserLastName("Balakrishnan");
 		userInfo2.setUserName("Bhairavi");
 		userInfo2.setUserPassword("****");
-		Role role2 = new Role();
-		role2.setRoleName("Developer");
-		userInfo2.setUserRole(role2);
+		userInfo2.setUserRole(roleService.findByRoleName(RoleNames.SYSTEM_ADMIN.getRoleNameDesc()));
 		userInfo2.setUserStatus("Active");
 
 		UserInfo userInfo3 = new UserInfo();
@@ -59,7 +57,6 @@ public class UserInfoHelper {
 		userInfo3.setCreatedDate("17-07-2020");
 		userInfo3.setDefaultHomePage("true");
 		userInfo3.setEmail("Viswa@test.com");
-		userInfo3.setId("1");
 		userInfo3.setLastLogin(new Date());
 		userInfo3.setModifiedBy("Viswa");
 		userInfo3.setModifiedDate("17-07-2020");
@@ -68,9 +65,7 @@ public class UserInfoHelper {
 		userInfo3.setUserLastName("Chari");
 		userInfo3.setUserName("Viswa");
 		userInfo3.setUserPassword("****");
-		Role role3 = new Role();
-		role3.setRoleName("Developer");
-		userInfo3.setUserRole(role3);
+		userInfo3.setUserRole(roleService.findByRoleName(RoleNames.MANAGER.getRoleNameDesc()));
 		userInfo3.setUserStatus("Active");
 
 		List<UserInfo> userList = new ArrayList();

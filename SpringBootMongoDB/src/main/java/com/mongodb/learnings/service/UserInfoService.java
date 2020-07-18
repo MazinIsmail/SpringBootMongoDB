@@ -32,7 +32,8 @@ public class UserInfoService {
 
 	public List<UserInfo> getUsers() {
 		logger.debug("Start : getUsers()");
-		List<UserInfo> userInfoList = userInfoRepo.saveAll(userInfoHelper.getUsers());
+		List<UserInfo> userInfoList = userInfoHelper.getUsers();
+		userInfoList = userInfoRepo.saveAll(userInfoHelper.getUsers());
 		logger.debug("End : getUsers()");
 		return userInfoList;
 	}
