@@ -64,13 +64,6 @@ public class RoleController {
 		return new ResponseEntity<>(rolesList, HttpStatus.OK);
 	}
 
-	@GetMapping(value = "/all/user")
-	public ResponseEntity<List<Role>> getAllRoles(@RequestBody @Valid @NotNull UserInfo userInfo) {
-		logger.info("In getAllRoles().");
-		List<Role> userSpecificRolesList = roleService.filterBasedRole(userInfo);
-		return new ResponseEntity<>(userSpecificRolesList, HttpStatus.OK);
-	}
-
 	@PostMapping(value = "/create", consumes = { "application/json" })
 	public ResponseEntity<?> addRole(@RequestBody @Valid @NotNull Role role) {
 		logger.info("In addRole().");

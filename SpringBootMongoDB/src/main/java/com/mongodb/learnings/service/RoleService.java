@@ -137,46 +137,6 @@ public class RoleService {
 		return flag;
 	}
 
-	public List<Role> filterBasedRole(UserInfo userInfo) {
-		String roleName = userInfo.getUserRole().getRoleName();
-
-		List<String> excludeRoleList = new ArrayList<>();
-		excludeRoleList.add(RoleNames.BASIC.getRoleNameDesc());
-
-		if (roleName.equals(RoleNames.SYSTEM_ADMIN.getRoleNameDesc())) {
-			excludeRoleList.add(RoleNames.ROOT.getRoleNameDesc());
-		} else if (roleName.equals(RoleNames.COMPANY_ADMIN.getRoleNameDesc())) {
-			excludeRoleList.add(RoleNames.ROOT.getRoleNameDesc());
-			excludeRoleList.add(RoleNames.SYSTEM_ADMIN.getRoleNameDesc());
-		} else if (roleName.equals(RoleNames.MANAGER.getRoleNameDesc())) {
-			excludeRoleList.add(RoleNames.ROOT.getRoleNameDesc());
-			excludeRoleList.add(RoleNames.SYSTEM_ADMIN.getRoleNameDesc());
-			excludeRoleList.add(RoleNames.COMPANY_ADMIN.getRoleNameDesc());
-		} else if (roleName.equals(RoleNames.FINANCE.getRoleNameDesc())) {
-			excludeRoleList.add(RoleNames.ROOT.getRoleNameDesc());
-			excludeRoleList.add(RoleNames.SYSTEM_ADMIN.getRoleNameDesc());
-			excludeRoleList.add(RoleNames.COMPANY_ADMIN.getRoleNameDesc());
-		} else if (roleName.equals(RoleNames.ANALYST.getRoleNameDesc())) {
-			excludeRoleList.add(RoleNames.ROOT.getRoleNameDesc());
-			excludeRoleList.add(RoleNames.SYSTEM_ADMIN.getRoleNameDesc());
-			excludeRoleList.add(RoleNames.COMPANY_ADMIN.getRoleNameDesc());
-			excludeRoleList.add(RoleNames.MANAGER.getRoleNameDesc());
-			excludeRoleList.add(RoleNames.FINANCE.getRoleNameDesc());
-		} else if (roleName.equals(RoleNames.AGENT.getRoleNameDesc())) {
-			excludeRoleList.add(RoleNames.ROOT.getRoleNameDesc());
-			excludeRoleList.add(RoleNames.SYSTEM_ADMIN.getRoleNameDesc());
-			excludeRoleList.add(RoleNames.COMPANY_ADMIN.getRoleNameDesc());
-			excludeRoleList.add(RoleNames.MANAGER.getRoleNameDesc());
-			excludeRoleList.add(RoleNames.FINANCE.getRoleNameDesc());
-			excludeRoleList.add(RoleNames.ANALYST.getRoleNameDesc());
-		}
-		Query query = new Query();
-		query.addCriteria(new Criteria().orOperator(Criteria.where("roleName").nin(excludeRoleList))).fields();
-
-		List<Role> rolesList = mongoTemplate.find(query, Role.class, "Roles");
-
-		return rolesList;
-	}
 
 	public List<Role> getAllRole() {
 		Query query = new Query();
