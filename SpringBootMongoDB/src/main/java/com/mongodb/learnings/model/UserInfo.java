@@ -34,6 +34,8 @@ public class UserInfo {
 	@DBRef
 	private Role userRole;
 
+	private Department department;
+
 	private Date lastLogin;
 
 	private boolean active;
@@ -176,6 +178,14 @@ public class UserInfo {
 
 	public void setModifiedDate(String modifiedDate) {
 		this.modifiedDate = modifiedDate;
+	}
+
+	public Department getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(Department department) {
+		this.department = department;
 	}
 
 	@Override
