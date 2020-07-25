@@ -111,5 +111,7 @@ public class RoleController {
 		logger.info("SuccessFully Deleted All Role Records.");
 		return new ResponseEntity<String>("SuccessFully Deleted All Role Records.", HttpStatus.NO_CONTENT);
 	}
+	
+	//findOne can be used when primary key is int
 
 }

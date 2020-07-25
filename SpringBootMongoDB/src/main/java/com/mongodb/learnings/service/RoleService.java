@@ -11,6 +11,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -21,7 +25,6 @@ import com.mongodb.learnings.constants.RoleNames;
 import com.mongodb.learnings.constants.UserConstants;
 import com.mongodb.learnings.model.ModuleAccess;
 import com.mongodb.learnings.model.Role;
-import com.mongodb.learnings.model.UserInfo;
 import com.mongodb.learnings.repo.RoleRepository;
 
 @Service
@@ -41,7 +44,7 @@ public class RoleService {
 	public Role findByRoleName(String roleName) {
 		return roleRepository.findByRoleNameIgnoreCase(roleName.trim());
 	}
-
+	
 	public void deleteRole(Role role) {
 		roleRepository.delete(role);
 	}
@@ -129,5 +132,38 @@ public class RoleService {
 
 		List<Role> rolesList = mongoTemplate.find(query, Role.class, "Roles");
 		return rolesList;
+	}
+
+	public void pagination(String sortOrder, String sortColumnName) {
+
+		Sort sort = null;
+		if (sortOrder.equalsIgnoreCase("ASC")) {
+			sort = Sort.by(Sort.Direction.ASC, sortColumnName);
+		}
+		if (sortOrder.equalsIgnoreCase("DESC")) {
+			sort = Sort.by(Sort.Direction.DESC, sortColumnName);
+		}
+
+		int totalCount = 0;
+
+		Pageable pageable = PageRequest.of(0, 20, orderBy());
+		Page<Role> pageRoleList = roleRepository.findAll(pageable);
+
+		List<Role> roleLIst = pageRoleList.getContent();
+		
+//		roleRepository.findOne("78sgdhfsv");
+		
+
+	}
+
+	// If we want to sort the query results in descending order by using the value
+	// of the description field and in ascending order by using the value of the
+	// title field, we have to create the Sort object
+
+	private Sort orderBy() {
+
+		return new Sort(Sort.Direction.DESC, "description")
+
+				.and(new Sort(Sort.Direction.ASC, "title"));
 	}
 }
