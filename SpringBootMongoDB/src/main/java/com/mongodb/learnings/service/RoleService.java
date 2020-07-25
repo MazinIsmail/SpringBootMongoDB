@@ -14,6 +14,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -44,7 +45,7 @@ public class RoleService {
 	public Role findByRoleName(String roleName) {
 		return roleRepository.findByRoleNameIgnoreCase(roleName.trim());
 	}
-	
+
 	public void deleteRole(Role role) {
 		roleRepository.delete(role);
 	}
@@ -150,9 +151,8 @@ public class RoleService {
 		Page<Role> pageRoleList = roleRepository.findAll(pageable);
 
 		List<Role> roleLIst = pageRoleList.getContent();
-		
+
 //		roleRepository.findOne("78sgdhfsv");
-		
 
 	}
 
@@ -165,5 +165,34 @@ public class RoleService {
 		return new Sort(Sort.Direction.DESC, "description")
 
 				.and(new Sort(Sort.Direction.ASC, "title"));
+	}
+
+	public void sliceRole(String roleName) {
+		Slice<Role> slice = null;
+		try {
+			/*
+			 * Slice is a sized chunk of data with an indication of whether there is more
+			 * data available. Slice avoids triggering a count query to calculate the
+			 * overall number of pages as that might be expensive. A Slice only knows about
+			 * whether a next or previous Slice is available, which might be sufficient when
+			 * walking through a larger result set.
+			 */
+			Pageable pageable = PageRequest.of(0, 1);
+			while (true) {
+				slice = roleRepository.findByRoleName(roleName, pageable);
+				int number = slice.getNumber();
+				int numberOfElements = slice.getNumberOfElements();
+				int size = slice.getSize();
+				System.out.printf("slice info - page number %s, numberOfElements: %s, size: %s%n", number,
+						numberOfElements, size);
+				List<Role> roleList = slice.getContent();
+				if (!slice.hasNext()) {
+					break;
+				}
+				pageable = slice.nextPageable();
+			}
+		} catch (DataAccessException e) {
+			logger.error("Error while saving role {}", e);
+		}
 	}
 }

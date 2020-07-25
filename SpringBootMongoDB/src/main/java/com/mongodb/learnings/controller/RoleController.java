@@ -44,6 +44,13 @@ public class RoleController {
 		return new ResponseEntity<Role>(role, HttpStatus.OK);
 	}
 
+	@GetMapping(value = "/paginate/rolename/{roleName}")
+	public ResponseEntity<?> getRoleByNameList(@PathVariable("roleName") @NotEmpty String roleName) {
+		logger.info("In getRoleByNameList()");
+		roleService.sliceRole(roleName.trim());
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+
 	@DeleteMapping(value = "/delete/rolename", consumes = { "application/json" })
 	public ResponseEntity<?> deleteRoleByRoleName(@RequestBody @Valid @NotNull Role role) {
 		logger.info("In deleteRoleByRoleName().");
@@ -111,7 +118,7 @@ public class RoleController {
 		logger.info("SuccessFully Deleted All Role Records.");
 		return new ResponseEntity<String>("SuccessFully Deleted All Role Records.", HttpStatus.NO_CONTENT);
 	}
-	
-	//findOne can be used when primary key is int
+
+	// findOne can be used when primary key is int
 
 }
