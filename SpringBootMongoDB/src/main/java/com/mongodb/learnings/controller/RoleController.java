@@ -15,14 +15,11 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mongodb.learnings.constants.RoleNames;
 import com.mongodb.learnings.model.Role;
-import com.mongodb.learnings.model.UserInfo;
 import com.mongodb.learnings.service.RoleService;
 
 @RestController
@@ -64,61 +61,7 @@ public class RoleController {
 		return new ResponseEntity<Role>(userRole, HttpStatus.NO_CONTENT);
 	}
 
-	@GetMapping(value = "/all")
-	public ResponseEntity<List<Role>> getAllRoles() {
-		logger.info("In getAllRoles().");
-		List<Role> rolesList = roleService.getAllRole();
-		return new ResponseEntity<>(rolesList, HttpStatus.OK);
-	}
 
-	@PostMapping(value = "/create", consumes = { "application/json" })
-	public ResponseEntity<?> addRole(@RequestBody @Valid @NotNull Role role) {
-		logger.info("In addRole().");
-		if (roleService.isRoleExists(role)) {
-			logger.info("Failed to Add Role:{}. Role name Already exists.", role.getRoleName());
-			return new ResponseEntity<String>("Role Name:" + role.getRoleName() + "  Already exists",
-					HttpStatus.CONFLICT);
-		} else {
-			role = roleService.saveRole(role);
-			logger.info("SuccessFully Created Role Record.");
-			return new ResponseEntity<Role>(role, HttpStatus.OK);
-		}
-	}
 
-	@GetMapping(value = "/createAll")
-	public ResponseEntity<?> createAllRoles() {
-		logger.info("In createAllRoles().");
-		List<Role> roleList = roleService.createAllRoles();
-		logger.info("SuccessFully Created All Role Record.");
-		return new ResponseEntity<List<Role>>(roleList, HttpStatus.OK);
-	}
-
-	@PutMapping(value = "/update", consumes = { "application/json" })
-	public ResponseEntity<?> updateRoleByName(@RequestBody @Valid @NotNull Role role) {
-		logger.info("In updateRoleByName().");
-		if (roleService.isRoleExists(role)) {
-			if (role.getRoleName().equalsIgnoreCase(RoleNames.SYSTEM_ADMIN.getRoleNameDesc())) {
-				return new ResponseEntity<String>("Role Name: " + role.getRoleName() + " cannot be updated",
-						HttpStatus.CONFLICT);
-			}
-			role = roleService.updateRole(role);
-			logger.info("SuccessFully Updated Role Record.");
-			return new ResponseEntity<Role>(role, HttpStatus.OK);
-		} else {
-			logger.error("Failed to Update Role:{}. Role name does not exist.", role.getRoleName());
-			return new ResponseEntity<String>("Role Name:" + role.getRoleName() + "  does not exist",
-					HttpStatus.CONFLICT);
-		}
-	}
-
-	@DeleteMapping(value = "/deleteAll")
-	public ResponseEntity<?> deleteAllRole() {
-		logger.info("In deleteAllRole().");
-		roleService.deleteAllRole();
-		logger.info("SuccessFully Deleted All Role Records.");
-		return new ResponseEntity<String>("SuccessFully Deleted All Role Records.", HttpStatus.NO_CONTENT);
-	}
-
-	// findOne can be used when primary key is int
 
 }
