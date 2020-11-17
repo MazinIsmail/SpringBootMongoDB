@@ -1,5 +1,6 @@
 package com.mongodb.learnings.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -11,6 +12,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import com.mongodb.learnings.model.Role;
@@ -81,5 +84,19 @@ public class RoleService {
 		} catch (DataAccessException e) {
 			logger.error("Error while saving role {}", e);
 		}
+	}
+
+	public List<Role> findByRoleNameList() {
+		List<Integer> listOfAge = new ArrayList<Integer>();
+		listOfAge.add(10);
+		listOfAge.add(30);
+		listOfAge.add(40);
+
+		Query query = new Query();
+		query.addCriteria(new Criteria().orOperator(Criteria.where("groupId").in(listOfAge))).fields();
+		logger.info("query: " + query.toString());
+		List<Role> roleList = mongoTemplate.find(query, Role.class, "Role");
+		System.out.println("roleList: " + roleList.toString());
+		return roleList;
 	}
 }

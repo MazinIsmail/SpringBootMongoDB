@@ -61,7 +61,4 @@ public class RoleController {
 		return new ResponseEntity<Role>(userRole, HttpStatus.NO_CONTENT);
 	}
 
-
-
-
 }
