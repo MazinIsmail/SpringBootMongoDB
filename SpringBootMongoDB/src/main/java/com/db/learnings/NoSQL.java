@@ -51,6 +51,7 @@ package com.db.learnings;
  * applications resilient, to scale-out instead of scale-up, and to intelligent
  * geo-place their data. Some NoSQL databases like MongoDB provided these
  * capabilities.
+ * 
  */
 public class NoSQL {
 
