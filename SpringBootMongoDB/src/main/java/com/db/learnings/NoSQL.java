@@ -52,6 +52,38 @@ package com.db.learnings;
  * geo-place their data. Some NoSQL databases like MongoDB provided these
  * capabilities.
  * 
+ * 
+ * So what is causing you to consider moving beyond traditional databases to
+ * NoSQL?
+ * 
+ * Is it the rigid schema of relational databases, which makes them difficult to
+ * change as application requirements evolve?
+ * 
+ * Is it a desire for a more iterative development process?
+ * 
+ * Is it concerns around how quickly you can load data into the database?
+ * 
+ * Is it the need to scale out huge data across data stores?
+ * 
+ * Is it the need to perform high-speed queries to support applications?
+ * 
+ * Is it the need to perform analytics faster by supporting a certain type of
+ * complex query?
+ * 
+ * Is it the need to use one repository for both transactions and analytics?
+ * 
+ * Is it the need to scale an application affordably?
+ * 
+ * There are many other questions that you may have.
+ * 
+ * It’s likely that many different factors are driving the consideration of
+ * NoSQL databases.
+ * 
+ * By analyzing the factors, it’s likely they will paint a picture of what
+ * exactly the database must do to meet your needs.
+ * 
+ * Here are some of the points that may be pivotal in your analysis.
+ * 
  */
 public class NoSQL {
 
